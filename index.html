@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Lobster&display=swap" rel="stylesheet">
+  <title>Date?</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: white;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      position: relative;
+    }
+
+    .alex-brush-regular {
+      font-family: "Alex Brush", cursive;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .lobster-regular {
+      font-family: "Lobster", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+
+    #match {
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      font-weight: bold;
+      color: white;
+      opacity: 0;
+      z-index: 1;
+      animation: bounce 1s infinite;
+    }
+
+    #dialog {
+      position: absolute;
+      background: #fff;
+      border: 2px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      width: 250px;
+      z-index: 2;
+    }
+
+    #dialog button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #yesBtn {
+      background-color: green;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: red;
+      color: white;
+    }
+
+    #heart {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 80px;
+      color: white;
+      opacity: 0;
+      animation: beat 1s infinite;
+      z-index: 1;
+    }
+
+    #yay {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 48px;
+      color: white;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    @keyframes beat {
+
+      0%,
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      50% {
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translate(-50%, -50%) translateY(0);
+      }
+
+      50% {
+        transform: translate(-50%, -50%) translateY(-20px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="dialog">
+    <p>Wanna go on a date?</p>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
+  <div class="lobster-regular" id="match">It's a match! 💘</div>
+  <div id="heart">❤️</div>
+  <div class="alex-brush-regular" id="yay">Roses are red,<br>
+    My jokes are absurd,<br>
+    You said “Yes” —<br>
+
+    The best thing I’ve heard!</div>
+
+  <script>
+    const dialog = document.getElementById("dialog");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const heart = document.getElementById("heart");
+    const yay = document.getElementById("yay");
+
+    function getRandomPosition() {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      const dialogWidth = dialog.offsetWidth;
+      const dialogHeight = dialog.offsetHeight;
+
+      const randomX = Math.random() * (screenWidth - dialogWidth);
+      const randomY = Math.random() * (screenHeight - dialogHeight);
+
+      return { x: randomX, y: randomY };
+    }
+
+    noBtn.addEventListener("click", () => {
+      const newPos = getRandomPosition();
+      dialog.style.left = `${newPos.x}px`;
+      dialog.style.top = `${newPos.y}px`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+      dialog.style.display = "none";
+      document.body.style.backgroundColor = "red";
+      heart.style.opacity = 1;
+      yay.style.opacity = 1;
+      match.style.opacity = 1;
+    });
+
+    // Set initial position to center
+    window.addEventListener("load", () => {
+      const initialX = (window.innerWidth - dialog.offsetWidth) / 2;
+      const initialY = (window.innerHeight - dialog.offsetHeight) / 2;
+      dialog.style.left = `${initialX}px`;
+      dialog.style.top = `${initialY}px`;
+    });
+  </script>
+</body>
+
+</html>
